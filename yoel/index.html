@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BlackJack</title>
+
+	<link rel = "icon" type = "image/png" href = "src/images/icons-512.png">
+
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<link rel="js" type="/sw.js" href="">
+	<link rel="manifest" href="/manifest.json">
+	<script src="src/js/app.js"></script>
+	
+<style>
+	body{
+		font-size: calc(8px + 1vw);
+		line-height: calc(1.1em + 0.5vw);
+	}
+	h1{
+		font-size: calc(20px + 2vw);
+		line-height: calc(1.1em + 0.5vw);
+	}
+	.title {
+		text-align: center;
+		font-size: calc(24px + 1vw);
+		margin-top : 20px;
+	}
+	.flex-container {
+		display: flex;
+		flex-wrap: wrap;
+		text-align: center;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		display : none;
+		margin : 10px;
+	}
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+	}
+	.winlose{
+		text-align: center;
+		width:33%;
+		height: 15%;
+	}
+	.tie{
+		vertical-align: middle;
+		text-align: center;
+		width:33%;
+		height: 15%;
+	}
+	.images{
+		vertical-align: middle;
+		width:20%;
+		height:25%;
+	}
+	.player-image{
+		width : 200px;
+		height : 250px;
+		border : solid 1px black;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.bot-image{
+		width : 200px;
+		height : 250px;
+		border : solid 1px black;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.btn-image {
+		vertical-align: middle;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	img {
+		width : 200px;
+		height : 250px;
+	}
+	#highscore_form{
+		display: none;
+	}
+	#stop{
+		display: none;
+	}
+	#start{
+		display: none;
+	}
+	/* Big tablet to 1200px */
+	@media only screen and (max-width: 1200px) and (min-width: 1024px) {
+		img {
+			width : 144px;
+			height : 180px;
+		}
+		.player-image{
+			width : 144px;
+			height : 180px;
+		}
+		.bot-image{
+			width : 144px;
+			height : 180px;
+		}
+	}
+	/* Small tablet to big tablet: from 768px to 1023px */
+	@media only screen and (max-width: 1023px) and (min-width: 768px) {
+		img {
+			width : 120px;
+			height : 150px;
+		}
+		.player-image{
+			width : 120px;
+			height : 150px;
+		}
+		.bot-image{
+			width : 120px;
+			height : 150px;
+		}
+	}
+	/* Small phones to small tablets: from 481px to 767px */
+	@media only screen and (max-width: 767px) and (min-width: 481px) {
+		img {
+			width : 96px;
+			height : 120px;
+		}
+		.player-image{
+			width : 96px;
+			height : 120px;
+		}
+		.bot-image{
+			width : 96px;
+			height : 120px;
+		}
+	}
+	/* Small phones: from 0 to 480px */
+	@media only screen and (max-width: 480px) and (min-width: 0px) {
+		img {
+			width : 72px;
+			height : 90px;
+		}
+		.player-image{
+			width : 72px;
+			height : 90px;
+		}
+		.bot-image{
+			width : 72px;
+			height : 90px;
+		}
+	}
+	
+</style>
+
+</head>
+
+<body onload="load()">
+
+<div data-role="page" data-theme="b">
+
+	<div data-role="header">
+			<div data-role="navbar">
+			    <ul>
+			        <li><a href="index.html" class="ui-btn-active" rel="external" data-icon="home">Home</a></li>
+			        <li><a href="highscore.html" rel="external" data-icon="bars">Highscore</a></li>
+			    </ul>
+			</div>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+				<h1 class="title"><font face="impact">Black Jack</font></h1>
+				<div class="container" id="nickname_form">
+					<input type="text" id="nick" placeholder="nickname">
+					<div class="ui-grid-solo">
+						<div class="ui-block-a"><button id="submit" data-theme="a">Submit name</button></div>
+					</div>
+				</div>
+				<div class="flex-container">
+					<div class="ui-grid-solo">
+						
+						<div class="ui-block-a">
+							<h1><font face="verdana">Dealer's Hand - <span id="bot-score"></span></font></h1>
+						</div>
+						
+						<div class="ui-grid-d">
+							<div class="images ui-block-a">
+								<div class="bot-image" id="bot-image-1"></div>
+							</div>
+							<div class="images ui-block-b">
+								<div class="bot-image" id="bot-image-2"></div>
+							</div>
+							<div class="images ui-block-c">
+								<div class="bot-image" id="bot-image-3"></div>
+							</div>
+							<div class="images ui-block-d">
+								<div class="bot-image" id="bot-image-4"></div>
+							</div>
+							<div class="images ui-block-e">
+								<div class="bot-image" id="bot-image-5"></div>
+							</div>
+						</div>
+						<br>
+						<br>
+						<div class="ui-block-a">
+							<h1><font face="verdana">Your Hand - <span id="player-score"></span><span id="winlose"></span></font></h1>
+						</div>
+						<div class="ui-grid-d">
+							<div class="images ui-block-a">
+								<div class="player-image" id="player-image-1"></div>
+							</div>
+							<div class="images ui-block-b">
+								<div class="player-image" id="player-image-2"></div>
+							</div>
+							<div class="images ui-block-c">
+								<div class="player-image" id="player-image-3"></div>
+							</div>
+							<div class="images ui-block-d">
+								<div class="player-image" id="player-image-4"></div>
+							</div>
+							<div class="images ui-block-e">
+								<div class="player-image" id="player-image-5"></div>
+							</div>
+						</div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"><button name="hit" id="hit" data-theme="a" data-icon="plus"> Hit </button></div>
+						
+							<div class="ui-block-b"><button name="stand" id="stand" data-theme="a" data-icon="check"> Stand </button></div>
+
+						</div>
+						<div class="ui-block-a">Total Score : <span id="total-score"></span></div>
+						<div class="ui-grid-a">
+							<div class="ui-block-a"><button type="button" class="btn btn-primary" data-theme="a" id="start" data-icon="refresh">Play Again</button></div>
+							<div class="ui-block-b"><button type="button" class="btn btn-primary" data-theme="a" id="stop" data-icon="forbidden">Stop Playing</button></div>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+	</div><!-- /content -->
+</div><!-- /page -->
+	
+	<script>
+		$(document).ready(function() {
+		  
+		});
+	  if ('serviceWorker' in navigator) {
+	    console.log("Will the service worker register?");
+	    navigator.serviceWorker.register('sw.js')
+	      .then(function(reg){
+	        console.log("Yes, it did.");
+	      }).catch(function(err) {
+	        console.log("No it didn't. This happened: ", err)
+	      });
+	  }
+	</script>
+
+	<script type="text/javascript">
+		var high=[];
+		var deck=[];
+		var player=[];
+		var bot=[];
+		var totalScore;
+		
+		function random() 
+		{
+			var rand;
+			do
+			{
+				rand = Math.floor(Math.random()*52)+1;
+			}while(!deck.includes(rand));
+			deck[rand-1] = -1;
+			return rand;
+		}
+		
+		function endgame(win)
+		{
+			if (win == 0)
+			{
+				$('#winlose').html(" (You Lose)");
+				$('#winlose').css('color','red');
+				if(totalScore > 0)
+				{
+					totalScore -= 1;
+				}
+				
+			}
+			else
+			{
+				$('#winlose').html(" (You Win)");
+				$('#winlose').css('color','green');
+				totalScore += 5;
+			}
+			
+			$('#hit').attr('disabled',true);
+			$('#stand').attr('disabled',true);
+			$('#total-score').html(totalScore);
+			$('#start').attr('disabled',false);
+		}
+		
+		function createDeck()
+		{
+			for(var i = 1 ; i < 53 ; i++)
+			{
+				deck.push(i);
+			}
+		}
+		
+		function populatePlayer()
+		{
+			for(var i = 0 ; i < player.length ; i++)
+			{
+				var temp = player[i];
+				if (temp < 10)
+				{
+					temp = "0" + temp;
+				}
+				
+				$('#player-image-'+(i+1)).empty().append($('<img />', { src: "src/images/asset_mobweb/deck_Page_"+temp+".png" }));
+			}
+		}
+		
+		function populateBot(check = 1)
+		{
+			for(var i = 0 ; i < bot.length ; i++)
+			{
+				var temp = bot[i];
+				if (temp < 10)
+				{
+					temp = "0" + temp;
+				}
+				
+				if(i == 0 && check == 1)
+				{
+					$('#bot-image-'+(i+1)).empty().append($('<img />', { src: "src/images/asset_mobweb/deck_Page_55.png" }));
+				}
+				else
+				{
+					$('#bot-image-'+(i+1)).empty().append($('<img />', { src: "src/images/asset_mobweb/deck_Page_"+temp+".png" }));
+				}
+			}
+		}
+		
+		function emptyPopulation()
+		{
+			for(var i = 0 ; i < player.length ; i++)
+			{
+				$('#player-image-'+(i+1)).empty();
+			}
+			for(var i = 0 ; i < bot.length ; i++)
+			{
+				$('#bot-image-'+(i+1)).empty();
+			}
+		}
+		
+		function populatePlayerScore(playerScore)
+		{
+			$('#player-score').html(playerScore);
+			if(playerScore>21)
+			{
+				populateBot(0);
+				populateBotScore(checkBotScore(0));
+				endgame(0);
+			}
+		}
+		
+		function populateBotScore(botScore,playerScore = -1)
+		{	
+			$('#bot-score').html(botScore);
+			if(playerScore != -1)
+			{
+				if(botScore > 21 || botScore < playerScore)
+				{
+					endgame(1);
+				}
+				else
+				{
+					endgame(0);
+				}
+				
+			}
+		}
+		
+		function checkPlayerScore()
+		{
+			var playerScore = 0;
+			var aces = 0;
+			
+			for(var i = 0 ; i < player.length ; i++)
+			{
+				var temp = player[i] % 13;
+				if (temp == 1 && aces == 0)
+				{
+					aces = 1;
+				}
+				else
+				{
+					if (temp == 0 || (temp>= 10 && temp <13))
+					{
+						temp = 10;
+					}
+					playerScore += temp;
+				}				
+			}
+			
+			if (aces == 1)
+			{
+				if(playerScore + 11 <= 21)
+				{
+					playerScore += 11;
+				}
+				else
+				{
+					playerScore += 1;
+				}
+			}
+			return playerScore;
+		}
+		
+		function checkBotScore(check = 1)
+		{
+			var botScore = 0;
+			var aces = 0;
+			for(var i = check ; i < bot.length ; i++)
+			{
+				var temp = bot[i] % 13;
+				
+				if (temp == 1 && aces == 0)
+				{
+					aces = 1;
+				}
+				else
+				{
+					if (temp == 0 || (temp>= 10 && temp <13))
+					{
+						temp = 10;
+					}
+					botScore += temp;
+				}
+				
+			}
+			
+			if (aces == 1)
+			{
+				if(botScore + 11 <= 21)
+				{
+					botScore += 11;
+				}
+				else
+				{
+					botScore += 1;
+				}
+			}
+			return botScore;
+		}
+		
+		function initGame()
+		{	
+			$('#start').attr('disabled',true);
+			createDeck();
+			player.push(random());
+			player.push(random());
+			bot.push(random());
+			bot.push(random());
+			
+			populatePlayer();
+			populateBot();
+			
+			populatePlayerScore(checkPlayerScore());
+			populateBotScore(checkBotScore());
+		}
+		
+		function resetGame()
+		{
+			emptyPopulation();
+			player = [];
+			bot = [];
+			deck = [];
+			populatePlayer();
+			populateBot();
+			$('#winlose').html("");
+			$('#hit').attr('disabled',false);
+			$('#stand').attr('disabled',false);
+		}
+		
+		function load()
+		{
+			if (localStorage.getItem("high")) 
+			{
+				high = JSON.parse(localStorage.getItem("high"));
+				calculateScores();
+				initGame();
+			}
+			else
+			{
+				resetScore();
+			}
+		}
+		
+		function displayScores() 
+		{
+			$("#highfive").html("<tr><td>1</td><td>"+high[0].nick+"</td><td>"+high[0].score+"</td></tr>"+
+				"<tr><td>2</td><td>"+high[1].nick+"</td><td>"+high[1].score+"</td></tr>"+
+				"<tr><td>3</td><td>"+high[2].nick+"</td><td>"+high[2].score+"</td></tr>"+
+				"<tr><td>4</td><td>"+high[3].nick+"</td><td>"+high[3].score+"</td></tr>"+
+				"<tr><td>5</td><td>"+high[4].nick+"</td><td>"+high[4].score+"</td></tr>");
+		}
+		
+		function resetScore() {
+		    high = [{"nick": "-", "score": "0"},
+			    {"nick": "-", "score": "0"},
+			    {"nick": "-", "score": "0"},
+			    {"nick": "-", "score": "0"},
+			    {"nick": "-", "score": "0"}];
+		    var items = JSON.stringify(high);
+		    localStorage.setItem("high", items);
+		    displayScores();
+		    //console.log(items);
+		  }
+		function calculateScores(){
+			var nick = $("#nick").val();
+			var score =  parseInt($('#win-score').text());
+			high.push({"nick":nick, "score":score});
+		    //high.sort(function(o1,o2){return o1.score-o2.score}); //low to high
+		    high.sort(function(o1,o2){return o2.score-o1.score}); //high to low
+		    //high.shift(); //removes lowest at left, for low to high
+		    high.pop(); //removes lowest at right, for high to low
+		    var items = JSON.stringify(high);
+		    localStorage.setItem("high", items);
+		    displayScores();
+		}
+		
+		$("#hit").on("click", function() 
+		{
+			if(player.length < 5)
+			{
+				player.push(random());
+				populatePlayer();
+				populatePlayerScore(checkPlayerScore());
+			}
+		});
+		
+		$("#start").on("click", function() 
+		{
+			resetGame();
+			initGame();
+		});
+		
+		$("#stand").on("click", function() 
+		{
+			while(checkBotScore(0) < checkPlayerScore())
+			{
+				if (checkBotScore(0) > 17)
+				{
+					break;
+				}
+				bot.push(random());
+			}
+			populateBot(0);
+			populateBotScore(checkBotScore(0),checkPlayerScore());
+			
+		});
+		
+		$("#submit").on("click",function() 
+		{
+			if($("#nick").val() == "")
+			{
+				alert("Please Insert a Nickname");
+			}else
+			{
+				var nick = $("#nick").val();
+				totalScore = 0;
+				$('.flex-container').css('display','flex');
+				$('#stop').css('display','inline');
+				$('#start').css('display','inline');
+				$('#total-score').html(totalScore);
+				localStorage.setItem("nickname",nick);
+			}
+		})
+		
+		$("#stop").on("click",function() 
+		{
+			localStorage.setItem("score",totalScore);
+			$(location).attr('href','highscore.html');
+		})
+		
+		$( window ).on( "navigate", function() 
+		{
+			console.log( "navigated!" );
+		});
+	</script>
+
+</body>
+</html>
+
