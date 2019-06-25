@@ -44,10 +44,11 @@ function rollDice() {
     totmove = totmove+score;
     if(totmove <= 36)
     {
-        
+        totmove = 1;
         newlocation = "image"+totmove;
         //alert(newlocation);
-        if(totmove == 1 || totmove == 8 || totmove == 15 || totmove == 22 || totmove ==29 || totmove == 36)
+
+        if(totmove == 1)
         {
         	alert("masuk"+totmove);
         	document.getElementById("kotak"+totmove).innerHTML = "<img id='image"+totmove+"' src='src/img/player1.png' style='visibility: visible;'>";
