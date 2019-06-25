@@ -115,12 +115,14 @@ function rollDice() {
 	    localStorage.setItem("pendapatan",pendapatan);
 	    localStorage.setItem("message",message);
 	    document.getElementById("result").innerHTML =  "Kekayaan = Rp "+uang+"<br>Deskripsi event = "+message+"<br>Total uang dari event = Rp "+pendapatan;
-	    alert("roll to restart");
+	    alert("kekayaan : "+uang+" || roll to restart");
         document.getElementById("image0").style.visibility = "visible";
                 localStorage.setItem("month",totmove);
 	    //oldlocation = "image"+totmove;
 	    //document.getElementById(oldlocation).style.visibility = "hidden";
 	    totmove = 0;
+        localStorage.setItem("month",totmove);
+        localStorage.setItem("uang",uang);
 	    uang = 0;
     }
     
