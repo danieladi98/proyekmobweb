@@ -7,13 +7,13 @@ self.addEventListener('install', function(event) {
           'index.html',
            'app.js',
            'src/js/script.js',
-           'src/css/style.css'
-//            'src/img/background.jpg',
-//            'src/img/player1.png',
-//            'src/img/logo.png'
-//           '/src/manifest.json',
-//           '/offline.html'
-//           'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+           'src/css/style.css',
+           'src/img/background.jpg',
+           'src/img/player1.png',
+           'src/img/logo.png',
+          'src/manifest.json',
+          'offline.html',
+          'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
       ]);
     })
   );
