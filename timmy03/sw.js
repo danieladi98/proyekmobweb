@@ -3,7 +3,7 @@ self.addEventListener('install', function(event) {
     caches.open('first-app').then(function(cache) {
       return cache.addAll([
           '/index.html',
-          '/src/js/app.js',
+          '/app.js',
           '/src/js/script.js',
           '/src/css/style.css',
           '/src/img/background.jpg',
