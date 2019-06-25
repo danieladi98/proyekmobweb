@@ -4,7 +4,7 @@ self.addEventListener('install', function(event) {
     caches.open('first-app').then(function(cache) {
       //console.log("first app opened");
       return cache.addAll([
-           '/index.html'
+          'index.html'
 //           '/app.js',
 //           '/src/js/script.js',
 //           '/src/css/style.css',
