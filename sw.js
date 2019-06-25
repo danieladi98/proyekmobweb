@@ -9,9 +9,9 @@ self.addEventListener('install', function(event) {
           '/src/img/background.jpg',
           '/src/img/player1.png',
           '/src/img/logo.png',
-          'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
           '/src/manifest.json',
-          '/offline.html'
+          '/offline.html',
+          'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
       ]);
     })
   );
