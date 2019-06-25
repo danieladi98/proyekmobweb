@@ -31,5 +31,7 @@ window.addEventListener('beforeinstallprompt', function(event) {
     });
 
     deferredPrompt = null;
+  }else {
+    console.log("ANEH");
   }
 });
