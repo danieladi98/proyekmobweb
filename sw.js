@@ -7,7 +7,7 @@ self.addEventListener('install', function(event) {
           'index.html',
            'app.js',
            'src/js/script.js',
-           'src/css/style.css',
+           'src/css/style.css'
 //            'src/img/background.jpg',
 //            'src/img/player1.png',
 //            'src/img/logo.png'
