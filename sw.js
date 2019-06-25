@@ -1,6 +1,8 @@
 self.addEventListener('install', function(event) {
+  console.log("install sw done");
   event.waitUntil(
     caches.open('first-app').then(function(cache) {
+      console.log("first app opened");
       return cache.addAll([
 //           '/index.html',
 //           '/app.js',
