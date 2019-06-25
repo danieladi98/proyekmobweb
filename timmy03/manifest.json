@@ -7,17 +7,17 @@
   "short_name": "LoP",
   "icons": [
     {
-      "src": "/src/img/logo.png",
+      "src": "src/img/logo.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "/src/img/logo.png",
+      "src": "src/img/logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "scope": ".",
   "display": "standalone",
   "orientation": "landscape",
