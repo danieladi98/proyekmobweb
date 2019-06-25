@@ -9,7 +9,6 @@ self.addEventListener('install', function(event) {
           '/src/img/background.jpg',
           '/src/img/player1.png',
           '/src/img/logo.png',
-          
           '/src/manifest.json',
           '/offline.html'
       ]);
