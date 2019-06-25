@@ -1,7 +1,3 @@
-// {
-//     "display":      "standalone",  Could be "fullscreen", "standalone", "minimal-ui", or "browser" 
-//     "orientation":  "landscape" /* Could be "landscape" or "portrait" */
-// }
 {
   "name": "Life of Programmer",
   "short_name": "LoP",
