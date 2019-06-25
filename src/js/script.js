@@ -28,7 +28,7 @@ function rollDice() {
         score = score + parseInt(die.dataset.roll);
     });
     oldlocation = "image"+totmove;
-    //alert(oldlocation);
+    alert(oldlocation);
     if(totmove == 1 || totmove == 8 || totmove == 15 || totmove == 22 || totmove ==29 || totmove == 36)
     {
     	alert("keluar"+totmove);
