@@ -2,15 +2,16 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('first-app').then(function(cache) {
       return cache.addAll([
-          '/index.html',
-          '/app.js',
-          '/src/js/script.js',
-          '/src/css/style.css',
-          '/src/img/background.jpg',
-          '/src/img/player1.png',
-          '/src/img/logo.png',
-          '/src/manifest.json',
-          '/offline.html'
+//           '/index.html',
+//           '/app.js',
+//           '/src/js/script.js',
+//           '/src/css/style.css',
+//           '/src/img/background.jpg',
+//           '/src/img/player1.png',
+//           '/src/img/logo.png',
+//           '/src/manifest.json',
+//           '/offline.html',
+//           'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
       ]);
     })
   );
